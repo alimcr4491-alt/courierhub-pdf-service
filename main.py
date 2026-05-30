@@ -1,3 +1,4 @@
+from fastapi.middleware.cors import CORSMiddleware
 import io
 import os
 import re
@@ -10,6 +11,16 @@ from reportlab.lib.pagesizes import A4
 from PyPDF2 import PdfReader, PdfWriter
 
 app = FastAPI(title="CourierHub PDF Service")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://www.thecourierhub.uk",
+        "https://thecourierhub.uk",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 TEMPLATE_PATH = "template.pdf"
 
